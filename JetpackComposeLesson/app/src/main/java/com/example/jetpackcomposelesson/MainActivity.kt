@@ -42,17 +42,17 @@ fun Greeting() {
     Column(modifier = Modifier.padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround) {
-        Text(text = "Salaaaaaaaaam",
+        Text(text = "Hello",
             color = Color.Red,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Italic
         )
-        Text(text = "Sagooool",
+        Text(text = "Kotlin",
             color = Color.Red,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Italic
         )
-        Text(text = "Kotliiinnnn",
+        Text(text = "And Jetpack",
             color = Color.Red,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Italic
