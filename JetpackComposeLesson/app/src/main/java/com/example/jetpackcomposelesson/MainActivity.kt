@@ -10,11 +10,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,14 +54,36 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    var number by remember{mutableStateOf(0)}
-    Column(modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        MyText(text = number.toString(), Color.Red,28)
-        Row {
-            Text(text = "Add", modifier = Modifier.clickable {number++ }.padding(end = 5.dp))
-            Text(text = "Remove", modifier = Modifier.clickable { number-- })
+    var number by remember { mutableStateOf(0) }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        MyText(text = number.toString(), Color.Red, 28)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            OutlinedButton(onClick = {
+                number--
+            },
+                Modifier.weight(50f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Red,
+                    contentColor = Color.White
+                )) {
+                Text(text = "Remove")
+            }
+            Button(onClick = {
+                number++
+            },
+                Modifier.weight(50f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Green
+                )) {
+                Text(text = "Add")
+            }
         }
     }
 }
