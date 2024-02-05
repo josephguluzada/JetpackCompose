@@ -3,10 +3,16 @@ package com.example.jetpackcomposelesson
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -39,25 +45,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    Column(modifier = Modifier.padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround) {
-        Text(text = "Hello",
-            color = Color.Red,
-            fontWeight = FontWeight.Bold,
-            fontStyle = FontStyle.Italic
-        )
-        Text(text = "Kotlin",
-            color = Color.Red,
-            fontWeight = FontWeight.Bold,
-            fontStyle = FontStyle.Italic
-        )
-        Text(text = "And Jetpack",
-            color = Color.Red,
-            fontWeight = FontWeight.Bold,
-            fontStyle = FontStyle.Italic
-        )
-    }
+   Box(modifier = Modifier,contentAlignment = Alignment.Center){
+       Box(modifier = Modifier.size(100.dp).background(Color.Blue))
+       Box(modifier = Modifier.size(70.dp).background(Color.Red))
+       Box(modifier = Modifier.size(40.dp).background(Color.Green))
+   }
+
 }
 
 @Preview(showBackground = true)
