@@ -45,12 +45,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-   Box(modifier = Modifier,contentAlignment = Alignment.Center){
-       Box(modifier = Modifier.size(100.dp).background(Color.Blue))
-       Box(modifier = Modifier.size(70.dp).background(Color.Red))
-       Box(modifier = Modifier.size(40.dp).background(Color.Green))
-   }
-
+    Column(modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        MyText(text = "Compose", color = Color.Red, size =22 )
+        MyText(text = "Kotlin", color = Color.Blue, size =24 )
+    }
 }
 
 @Preview(showBackground = true)
