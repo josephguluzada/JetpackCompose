@@ -7,7 +7,5 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun MyText(text:String,color:Color,size:Int){
-    Text(text = text,
-        color = color,
-        fontSize = size.sp  )
+    Text(text = text, color = color, fontSize = size.sp  )
 }
