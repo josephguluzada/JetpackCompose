@@ -15,12 +15,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.TextFormat
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,8 +37,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.jetpackcomposelesson.ui.theme.JetpackComposeLessonTheme
 
 class MainActivity : ComponentActivity() {
@@ -54,37 +62,26 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    var number by remember { mutableStateOf(0) }
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        MyText(text = number.toString(), Color.Red, 28)
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            OutlinedButton(onClick = {
-                number--
-            },
-                Modifier.weight(50f),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Red,
-                    contentColor = Color.White
-                )) {
-                Text(text = "Remove")
+    var name by remember {
+        mutableStateOf("")
+    }
+    Column(modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly) {
+        Text(text = name, fontSize = 28.sp)
+        OutlinedTextField(
+            singleLine = true,
+            value = name,
+            onValueChange = { if(it.length <= 5) name = it },
+            label = { Text(text = "Enter the name") },
+            supportingText = {
+                Text(text = "${name.length}/5",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.End)
+
             }
-            Button(onClick = {
-                number++
-            },
-                Modifier.weight(50f),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Green
-                )) {
-                Text(text = "Add")
-            }
-        }
+        , modifier = Modifier.fillMaxWidth(),
+            leadingIcon = {Icon(Icons.Filled.Person, contentDescription = "")})
     }
 }
 
