@@ -1,6 +1,7 @@
 package com.example.jetpackcomposelesson
 
 import FirstPage
+import android.icu.text.MessagePattern.ArgType
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -42,9 +43,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.jetpackcomposelesson.ui.theme.JetpackComposeLessonTheme
 
 class MainActivity : ComponentActivity() {
@@ -74,10 +77,25 @@ fun Routing(){
         composable(route="first_page"){
             FirstPage(navController)
         }
-
-        composable(route="second_page"){
-            SecondPage(navController)
+        composable(route="second_page"+"?name={name}&age={age}",
+            arguments = listOf(
+                navArgument(name = "name"){
+                    type = NavType.StringType
+                    defaultValue = "No name"
+                },
+                navArgument(name = "age"){
+                    type = NavType.IntType
+                    defaultValue = 0
+                }
+            )){
+            val name = it.arguments?.getString("name")!!
+            val age = it.arguments?.getInt("age")!!
+            SecondPage(navController,name = name , age = age)
         }
+        composable(route="third_page"){
+            ThirdPage(navController)
+        }
+
     }
 }
 

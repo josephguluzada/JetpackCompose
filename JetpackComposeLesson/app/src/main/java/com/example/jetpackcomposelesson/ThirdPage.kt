@@ -1,3 +1,4 @@
+package com.example.jetpackcomposelesson
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,18 +9,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 
 @Composable
-fun FirstPage(navController: NavController){
+fun ThirdPage(navController: NavController){
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
-        Text(text = "1. page")
-        val name = "Yusif"
-        val age = 26
-        Button(onClick = { navController.navigate("second_page"+"?name=${name}&age=${age}") }) {
-            Text(text = "Next")
+        Text(text = "3. page")
+        Button(onClick = { navController.popBackStack() }) {
+            Text(text = "Back")
         }
+//        Button(onClick = { navController.navigate("first_page") }) {
+//            Text(text = "Back")
+//        }
     }
 }
