@@ -1,5 +1,6 @@
 package com.example.jetpackcomposelesson
 
+import FirstPage
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -41,6 +42,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.jetpackcomposelesson.ui.theme.JetpackComposeLessonTheme
 
 class MainActivity : ComponentActivity() {
@@ -53,35 +57,27 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting()
+                    Routing()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting() {
-    var name by remember {
-        mutableStateOf("")
-    }
-    Column(modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly) {
-        Text(text = name, fontSize = 28.sp)
-        OutlinedTextField(
-            singleLine = true,
-            value = name,
-            onValueChange = { if(it.length <= 5) name = it },
-            label = { Text(text = "Enter the name") },
-            supportingText = {
-                Text(text = "${name.length}/5",
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.End)
 
-            }
-        , modifier = Modifier.fillMaxWidth(),
-            leadingIcon = {Icon(Icons.Filled.Person, contentDescription = "")})
+
+@Composable
+fun Routing(){
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "first_page"){
+        composable(route="first_page"){
+            FirstPage(navController)
+        }
+
+        composable(route="second_page"){
+            SecondPage(navController)
+        }
     }
 }
 
@@ -89,6 +85,6 @@ fun Greeting() {
 @Composable
 fun GreetingPreview() {
     JetpackComposeLessonTheme {
-        Greeting()
+        Routing()
     }
 }
