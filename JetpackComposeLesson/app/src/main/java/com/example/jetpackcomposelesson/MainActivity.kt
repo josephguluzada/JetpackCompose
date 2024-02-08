@@ -30,6 +30,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -71,32 +72,26 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Routing(){
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = "first_page"){
-        composable(route="first_page"){
-            FirstPage(navController)
-        }
-        composable(route="second_page"+"?name={name}&age={age}",
-            arguments = listOf(
-                navArgument(name = "name"){
-                    type = NavType.StringType
-                    defaultValue = "No name"
-                },
-                navArgument(name = "age"){
-                    type = NavType.IntType
-                    defaultValue = 0
-                }
-            )){
-            val name = it.arguments?.getString("name")!!
-            val age = it.arguments?.getInt("age")!!
-            SecondPage(navController,name = name , age = age)
-        }
-        composable(route="third_page"){
-            ThirdPage(navController)
-        }
-
+    var name by remember {
+        mutableStateOf("")
     }
+    var counter by remember {
+        mutableStateOf(0)
+    }
+    LaunchedEffect(key1 = name){
+        counter++
+    }
+
+    Column(modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        
+        Text(text = counter.toString(), fontSize = 30.sp)
+
+        TextField(value = name, onValueChange = {name = it})
+    }
+    
+
 }
 
 @Preview(showBackground = true)
